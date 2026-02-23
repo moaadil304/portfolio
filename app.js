@@ -11,16 +11,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const MONGO_URL = process.env.DB_CONNECTION;
+const PORT = process.env.PORT || 8080;
 
 mongoose
   .connect(MONGO_URL)
   .then(() => {
     console.log("Database connected successfully");
-    app.listen(8080, () => {
-      console.log("Server listening on port 8080");
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((err) => console.log(err));
+
 app.post("/", async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -28,11 +31,9 @@ app.post("/", async (req, res) => {
     const newUser = new User({ name, email, message });
     await newUser.save();
 
-    console.log(newUser);
     res.redirect("/");
   } catch (err) {
     console.log(err);
     res.status(500).send("Error saving data");
   }
 });
-

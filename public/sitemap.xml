@@ -6,10 +6,3 @@
   </url>
 </urlset>
 ```
-
-### Step 2 — `public/robots.txt` banao
-Same `public/` folder mein `robots.txt` banao:
-```
-User-agent: *
-Allow: /
-Sitemap: https://www.aadilportfolio.me/sitemap.xml
